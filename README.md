@@ -1,48 +1,47 @@
-# ACM Research coding challenge (Fall 2022)
+# Description
 
-This semester's challenge is especially open-ended. [Here is a dataset](https://www.kaggle.com/datasets/chancev/carsforsale) on Kaggle called "CarsForSale". It contains data scraped from the online car marketplace Cars.com. Each row contains 25 pieces of information about a car's listing, such as its price, year, model, and color.
+This Kaggle notebook creates a visualization of the most popular car models over the years. There are 5 graphs: 3 stacked bar graphs, 1 line graph, and 1 bar chart race graph. To create the bar chart race, the internet option must be on. The Approach section details what data was used for each graph. The graphs appear in the Kaggle notebook in the order they appear in the Approaches section.
 
-The challenge is to do *something interesting* with the data. Can you find a pattern, answer a question, or create a visualization? In case nothing comes to mind, here are some ideas, with varying complexity:
+# Approaches
 
-- What qualities about a car do buyers seem to value the most?
-- Make a graph to visualize the most popular car models over time.
-- What colors of cars are most expensive?
-- Do different brands try to appeal to people looking for different things?
-- Come up with your own algorithm to figure out how good of a deal a listing is and compare it to the one in the dataset (`DealType`).
-- Use [cluster analysis](https://en.wikipedia.org/wiki/Cluster_analysis) to group the cars into categories.
-- How do people's taste in cars differ between states?
-- Train a machine learning model to predict some aspect of a car based on other information from its listing.
+## Approach 1
 
-However, we strongly encourage you to come up with your own problem to solve!
+My initial approach was to create a stacked bar graph with the x axis as the years and the y axis as the frequency that each model appeared in each year. The first part of doing this  was to get the frequencies of the car models for each year and put it into a useful data structure; I put them into a dict with year as key and frequency as value. To do this I first figured out how to get the model frequency for 1 year and I then put that code into a loop so It would get the frequencies for all of the present years. The next part was to actually graph the data. To do this I created a pandas DataFrame from the frequencies dict. I thought that the resulting stacked bar graph that used all of the models in the carsforsale dataset was bad because the graph was very hard to read which makes the graph pretty useless.
 
-You can use any programming language, framework, or library you want, but we recommend [creating a notebook in Kaggle](https://www.kaggle.com/docs/notebooks) and using Python. This will run in your browser, interlaces code with documentation, allows you to import the CarsForSale dataset easily by pressing the "Add data" button, and gives you access to Python's high-quality, high-level libraries for working with data. [Learn more about data science in Python.](https://www.w3schools.com/datascience/ds_python.asp)
+## Approach 2
 
-## How to submit your solution
+From my failures in Approach 1 I realized I would need to take a subset of the dataset in order to make my visualization readable. I decided to create a stacked bar graph of only the top 3 cars per year. To do this I created a sorted list in decreasing order of the frequencies of the models in each year. I then created a list of only the top 3 models of each year and created a dict that mapped years to frequencies. Then I created a pandas DataFrame from the dict and created a stacked bar graph of the data. I liked this graph more than the original but I thought that there may be a better subset of data I could use to create a visualization.
 
-1. [Create a  **public**  fork of this repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo) and name it  `ACM-Research-coding-challenge-22F` (click the "Fork" button in the top right).
+## Approach 3
 
-2. Replace this README file with a description ([written in Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/about-writing-and-formatting-on-github)) of your solution. Regardless of your success, describe the problem you set out to solve and how you did it. Split it up into sections with headers, and, if relevant, include figures.
+### Approach 3.1
 
-3. Make sure to include all relevant files in your fork. If you made the project in a Kaggle notebook, click **File** → **Download Notebook** to download it as an `.ipynb` file.
+I decided to create a stacked bar graph with the frequencies of the top 10 overall models through the years. This graph provided an even smaller set of data to examine and shows the incline and decline of popularity of the overall top 10 models. To do this I created a sorted list in decreasing order of all of the model frequencies over the entire dataset and discarded all but the top 10. I then used the frequencies dict and DataFrame I used to create the original graph and discarded all but the top 10 models and created the stacked bar graph.
 
-4. You may have to "clone" the fork you made to edit files locally on your computer and "push" them to GitHub. Learn how to do that [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
+### Approach 3.2
 
-4. Submit the link to your fork in this [form](http://apply.acmutd.co/research-coding-challenge).
+When looking at the stacked bar graph from Approach 3.1, I thought that using a line graph might make more sense. I thought it would make more sense because with a line graph you can see the growth and decay of the popularity of each model more easily than with a bar graph.
 
-## No collaboration policy
+## Approach 4
 
-**You may not collaborate with anyone on this challenge.** You _are_ allowed (and encouraged) to use internet documentation. If you use existing code (either from Github, Stack Overflow, or other sources), **please cite your sources in the README**.
+I then realized that I could make a bar chart race video with Kaggle, so I decided to do that.I used the frequencies dict and DataFrame from the original graph to do this.
 
-## Timing
+## Discarded Approach
 
-Please don't spend too long on this project: **30 to 60 minutes** is reasonable. It's okay to put more time into your submission than that, but we don't expect you to get that much done; we really don't want this challenge to be a burden!
+After the graph created in Approach 3.2, I was considering including a line graph that would use the top 10 models as a subset and display the percent of market share each car had. I did not end up leaving it in because the data does not have many entries for the earlier years. I felt that because of the difference in the amount of data collected for each year, the graph did not show anything that was particularly useful.
 
-If you're *completely new* to this kind of project, however, it will likely take you more than an hour. This is a *densely useful* project to go through (you will learn a lot), so we believe this is justified.
+# Analysis of Project and Thoughts
 
-## Assessment criteria
+While doing this project I learned a lot about creating data visualizations. The purpose of data visualizations is to create a model of data that can be read and more easily understood by humans. I realized that using a large dataset, like how I did in the first graph, is not human readable on a graph and I realized that to create a more effective visualization of the data I would have to get a smaller subset of the data. The 2nd and 3rd graphs I created were much easier to read and understand because I slimmed down the dataset.
 
-Submissions will be evaluated holistically, in combination with the rest of your application. We will consider your effort, use of external resources, how you approached the problem, and presentation, among other considerations.
+Because this dataset does not have as many entries for the earlier years, the effectiveness and accuracy of analysis on the change of data over time done with this dataset is likely hindered by this. The lack of data for the earlier years is likely due to the popularity of the internet during that time.
 
-## Support and questions
 
-Feel free to ask for clarifications in the #research-qna channel in the [ACM UTD Discord server](https://discord.gg/nJxRdKdG4d)! You can also directly message Roman Hauksson on Discord: `RomanHauksson#3458`.
+# Resources Used
+
+[pandas documentation](https://pandas.pydata.org/docs/)  
+[Python 3.10.6 documentation](https://docs.python.org/3/)  
+[Bar Chart Race Github](https://github.com/dexplo/bar_chart_race)  
+[Bar Chart Race Documentation](https://www.dexplo.org/bar_chart_race/)  
+[Tutorial on how to create mapping from 2 lists](https://www.etutorialspoint.com/index.php/548-write-a-python-program-to-map-two-lists-into-a-dictionary)   
+[Bilboard Hot 100 History - Bar Chart Race](https://www.kaggle.com/code/stpeteishii/billboard-hot-100-history-bar-chart-race) - specifically used to figure out how to play a bar chart race video in Kaggle
